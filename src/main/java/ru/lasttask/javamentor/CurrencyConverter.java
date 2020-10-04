@@ -10,6 +10,10 @@ import java.nio.charset.StandardCharsets;
 
 public class CurrencyConverter {
     private static final String URL_OF_API = "https://www.cbr-xml-daily.ru/daily_json.js";
+    //Тут запрос выводит в формате
+    // 1 рубль равен
+    // "EUR": 0.01092,
+    private static final String URL_OF_API_FORMAT_RUB_TO_CURRENCY = "https://www.cbr-xml-daily.ru/latest.js";
 
     public static Double convertToRub(Double digit, ValuteCharCode valuteCharCode) throws IOException, JSONException {
 
