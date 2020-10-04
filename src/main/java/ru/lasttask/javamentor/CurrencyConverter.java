@@ -21,7 +21,6 @@ public class CurrencyConverter {
         }
 
         Valute tmp = getValuteByCharCode(valuteCharCode);
-        digit = (digit * tmp.getValue()) / tmp.getNominal();
 
         return (digit * tmp.getValue()) / tmp.getNominal();
     }
