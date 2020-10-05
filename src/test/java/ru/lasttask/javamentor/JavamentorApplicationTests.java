@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.money.CurrencyUnit;
+import javax.money.Monetary;
 import java.io.IOException;
 
 
@@ -13,9 +15,12 @@ class JavamentorApplicationTests {
     void contextLoads() {
     }
 
+
     @Test
-    boolean testConverter() throws IOException, JSONException {
-            return CurrencyConverter.convertToRub(1d,ValuteCharCode.USD).equals(CurrencyConverter.convertUSDtoRUB(1d));
+    public void givenCurrencyCode_whenString_thanExist() {
+        CurrencyUnit usd = Monetary.getCurrency("USD");
+
+        System.out.println(usd);
     }
 
 }
