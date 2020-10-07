@@ -1,9 +1,7 @@
 package ru.lasttask.javamentor;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.joda.money.CurrencyUnit;
@@ -26,8 +24,6 @@ public class CurrencyConverterService {
      * "https://exchangeratesapi.io/"
      **/
     private final String URL_OF_API_BASE_RUB = "https://www.cbr-xml-daily.ru/daily_json.js";
-
-    private final CloseableHttpClient httpClient = HttpClients.createDefault();
 
     public Money convertToRub(Money money) throws Exception {
         if (money.getCurrencyUnit() == CurrencyUnit.of("RUB")) {
@@ -65,14 +61,9 @@ public class CurrencyConverterService {
     }
 
     private JSONObject getFullJSON() throws Exception {
-
-        HttpGet request = new HttpGet(URL_OF_API_BASE_RUB);
-
-        try (CloseableHttpResponse response = httpClient.execute(request)) {
-            HttpEntity entity = response.getEntity();
-            return new JSONObject(EntityUtils.toString(entity));
+        try (CloseableHttpResponse response = HttpClients.createDefault().execute(new HttpGet(URL_OF_API_BASE_RUB))) {
+            return new JSONObject(EntityUtils.toString(response.getEntity()));
         }
-
     }
 
 }
